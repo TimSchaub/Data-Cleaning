@@ -1,9 +1,9 @@
-﻿## Code book for wearables test and training data
-# Study design
+﻿# Code book for wearables test and training data
+## Study design
 
 Calculate the means of all mean() and std() variables of the raw data.
 
-# Variables
+## Variables
 
 All variables without units.
 
@@ -84,16 +84,16 @@ resultData					data.table build with "extractedData" with "activity" and "subjec
 
 activitySubjectMeans		data.table containing the means of all variables grouped by activity & subject 
 
-# Tidying
+## Tidying
 
 Change column headings to more descriptive texts for test and training data by using the "features" data
 Map test and training labels with descriptions for activities from "activities" data
 
-# Combining
+## Combining
 1. Adding activity column with human readable names to test data and train data
 2. Union test and training data with rbind
 3. Select all columns from test and training data the contain "mean()" or "std()" into a new data.table
 
-# Result evaluation
+## Result evaluation
 
 1. Calculate mean by activity & subject on "resultData" data.table using lapply & by

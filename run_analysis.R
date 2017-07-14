@@ -1,7 +1,7 @@
 run_analysis <- function () {
   
   
-  #library(data.table, lib="C:\\Local\\Training\\Data Science\\lib")
+  library(data.table, lib="C:\\Local\\Training\\Data Science\\lib")
 
   #read files
   
@@ -27,13 +27,13 @@ run_analysis <- function () {
   testdata <- cbind(cleartestlabels[,2],testsubjects, testdata)           # add activity & subject column
   names(testdata)[1] <- "activity"                          # give it a descriptive name
   names(testdata)[2] <- "subject"                          # give it a descriptive name
-  str(testdata)
+  
 
   cleartrainlabels <- merge(trainlabels, activities[,2])    # create mapping table for training data activities
   traindata <- cbind(cleartrainlabels[,2], trainsubjects, traindata)        # add activity & subject column
   names(traindata)[1] <- "activity"                         # give it a descriptive name
   names(traindata)[2] <- "subject"                         # give it a descriptive name
-  str(traindata)
+  
   
   #combine datasets with a union logic using rbind
   
@@ -41,10 +41,11 @@ run_analysis <- function () {
   
   #do the extraction using data.frame coerce which makes selection more flexible
   
-  colIndexes <- grep("mean()|std()", names(mergedData))                           #select required variable columns
+  colIndexes <- grep("mean()|std()|Mean", names(mergedData))                           #select required variable columns
   extractedData <- data.frame(mergedData[,colIndexes, with=FALSE])                            #extract them to "extractedData" data frame
   resultData <- data.table(cbind(activity=mergedData$activity, subject=mergedData$subject, extractedData))    #recombine extractedData with activity column
   
   
-  activityMeans <- resultData[,lapply(.SD,mean), by=.(activity, subject)]   #means per activity
+  resultData[,lapply(.SD,mean), by=.(activity, subject)]   #means per activity & subject as function result
+  
 }
